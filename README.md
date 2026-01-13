@@ -119,9 +119,9 @@ Cine_Match/
 ├── dof.cpp                  # Core functionality implementation
 ├── mrs.h                    # Header file with struct definitions and function declarations
 ├── DSA FINAL PROJ.dev       # Dev-C++ project file
-├── Movies.txt               # Movie database (persistent storage)
-├── Users.txt                # User accounts (persistent storage)
-├── ratings.txt              # User ratings (persistent storage)
+├── Movies.txt               # Movie database (binary format, persistent storage)
+├── Users.txt                # User accounts (binary format, persistent storage)
+├── ratings.txt              # User ratings (binary format, persistent storage)
 └── README.md                # This file
 ```
 
@@ -130,9 +130,9 @@ Cine_Match/
 - **`main.cpp`**: Contains the main application loop, user interface menus, and handles user input for navigation
 - **`dof.cpp`**: Implements all the MovieRecommendationSystem functions including BST operations, file I/O, and recommendation algorithms
 - **`mrs.h`**: Defines the data structures (Movie, User, Rating) and the MovieRecommendationSystem class with all function prototypes
-- **`Movies.txt`**: Stores movie data in a structured format
-- **`Users.txt`**: Stores user credentials and information
-- **`ratings.txt`**: Stores user-movie rating associations
+- **`Movies.txt`**: Stores movie data in binary format (despite .txt extension)
+- **`Users.txt`**: Stores user credentials and information in binary format
+- **`ratings.txt`**: Stores user-movie rating associations in binary format
 
 ## 🚀 How to Build and Run
 
