@@ -67,7 +67,7 @@ struct Movie {
     float imbdRating;      // IMDb rating (variable name kept as in source)
     Movie* lchild;         // Left child pointer
     Movie* rchild;         // Right child pointer
-}
+};
 ```
 - **Key**: Movie ID
 - **Purpose**: Efficient movie search, insertion, and deletion operations
@@ -82,7 +82,7 @@ struct User {
     char password[40];     // Password
     User* lchild;          // Left child pointer
     User* rchild;          // Right child pointer
-}
+};
 ```
 - **Key**: User ID
 - **Purpose**: User authentication and account management
@@ -97,7 +97,7 @@ struct Rating {
     int uID;              // User ID
     Rating* lchild;        // Left child pointer
     Rating* rchild;        // Right child pointer
-}
+};
 ```
 - **Key**: Composite of user ID and movie ID
 - **Purpose**: Store and retrieve user ratings efficiently
@@ -261,41 +261,27 @@ Main Menu → Login → Remove any of your previous Ratings (7)
 
 ## 📊 Data File Format
 
-### Movies.txt Format
-Each movie is stored with fixed-width fields (40 characters for strings):
-```
-[ID (padded)]    [Name (40 chars)]    [Genre (40 chars)]    [Rating (float)]
-```
-Example (displayed with alignment, actual file uses fixed-width fields):
-```
-1      The Shawshank Redemption          Drama                        9.3
-2      The Godfather                     Crime                        9.2
-```
+The system uses binary file format for efficient data storage and retrieval. All three data files (Movies.txt, Users.txt, ratings.txt) store data in binary format, not plain text.
 
-**Note**: The actual file format uses fixed character widths as defined in the code (STRING_SIZE = 40).
+### Movies.txt Format
+Stores movie records in binary format using the Movie struct (excluding pointer fields):
+- Each record contains: `movieID`, `movieName[40]`, `genre[40]`, `imbdRating`
+- Written using: `write(reinterpret_cast<char*>(movie), offsetof(Movie, lchild))`
+- Only data fields are stored (pointer fields `lchild` and `rchild` are excluded)
 
 ### Users.txt Format
-Each user account is stored as:
-```
-[ID (padded)]    [Username (40 chars)]    [Password (40 chars)]
-```
-Example:
-```
-100    john_doe                          mypassword123
-101    jane_smith                        securepass456
-```
+Stores user account information in binary format using the User struct:
+- Each record contains: `userID`, `userName[40]`, `password[40]`
+- Written using: `write(reinterpret_cast<char*>(user), offsetof(User, lchild))`
+- Only data fields are stored (pointer fields excluded)
 
 ### ratings.txt Format
-Each rating is stored as:
-```
-[User ID]    [Movie ID]    [Rating (1-5)]
-```
-Example:
-```
-100    1    5
-100    2    4
-101    1    5
-```
+Stores user ratings in binary format using the Rating struct:
+- Each record contains: `rating`, `mID`, `uID`
+- Written using: `write(reinterpret_cast<char*>(rating), offsetof(Rating, lchild))`
+- Only data fields are stored (pointer fields excluded)
+
+**Note**: The files use binary format for efficient I/O operations. The tree structure (left/right child pointers) is rebuilt in memory when loading data from files.
 
 ## 🔮 Future Enhancements
 
