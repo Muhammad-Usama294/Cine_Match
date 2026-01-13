@@ -64,7 +64,7 @@ struct Movie {
     int movieID;           // Unique identifier (BST key)
     char movieName[40];    // Movie title
     char genre[40];        // Movie genre
-    float imbdRating;      // IMDb rating
+    float imbdRating;      // IMDb rating (variable name kept as in source)
     Movie* lchild;         // Left child pointer
     Movie* rchild;         // Right child pointer
 }
@@ -156,9 +156,12 @@ g++ main.cpp dof.cpp -o CineMatch
 ./CineMatch
 ```
 
-**Note**: If using graphics features, you may need to link the graphics library:
+**Note**: If using graphics features, you may need to link the graphics library (flags vary by system):
 ```bash
-g++ main.cpp dof.cpp -o CineMatch -lgraph
+# Windows with WinBGIm
+g++ main.cpp dof.cpp -o CineMatch -lbgi -lgdi32 -lcomdlg32 -luuid -loleaut32 -lole32
+
+# Or if using a different graphics library, adjust accordingly
 ```
 
 ### Prerequisites
@@ -259,15 +262,17 @@ Main Menu → Login → Remove any of your previous Ratings (7)
 ## 📊 Data File Format
 
 ### Movies.txt Format
-Each movie is stored with fixed-width fields:
+Each movie is stored with fixed-width fields (40 characters for strings):
 ```
 [ID (padded)]    [Name (40 chars)]    [Genre (40 chars)]    [Rating (float)]
 ```
-Example:
+Example (displayed with alignment, actual file uses fixed-width fields):
 ```
 1      The Shawshank Redemption          Drama                        9.3
 2      The Godfather                     Crime                        9.2
 ```
+
+**Note**: The actual file format uses fixed character widths as defined in the code (STRING_SIZE = 40).
 
 ### Users.txt Format
 Each user account is stored as:
