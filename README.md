@@ -77,6 +77,8 @@ Stores movie information with the following structure:
 
 **Operations**: O(log n) average case for search, insert, and delete
 
+*Note: Current implementation uses unbalanced BST. In worst-case scenarios (e.g., inserting sorted data), operations can degrade to O(n) complexity.*
+
 ### 2. User BST
 Manages user accounts with:
 - **User ID** (key for BST ordering)
@@ -99,7 +101,7 @@ Tracks user ratings with:
 
 - **Programming Language**: C++
 - **Core Data Structure**: Binary Search Trees (BST)
-- **File I/O**: Binary and text file operations for data persistence
+- **File I/O**: Binary file operations for data persistence
 - **Graphics Library**: `graphics.h` for enhanced user interface
 - **Standard Libraries**:
   - `<iostream>` - Input/output operations
@@ -261,6 +263,7 @@ Offset 4-43:  Movie Name (char[40])
 Offset 44-83: Genre (char[40])
 Offset 84-87: IMDb Rating (float)
 ```
+*Note: Byte offsets may vary based on system architecture and compiler padding.*
 
 ### Users.txt Format
 Binary file storing User structures:
